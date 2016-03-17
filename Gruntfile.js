@@ -1,3 +1,7 @@
+(function() {
+  'use strict';
+}());
+
 module.exports = function(grunt) {
 
   // Project configuration.
@@ -7,7 +11,7 @@ module.exports = function(grunt) {
     //concat config
     concat: {
       options: {
-        separator: 'rn'
+        separator: '\n'
       },
 
       dist: {
@@ -49,6 +53,11 @@ module.exports = function(grunt) {
         }
       }
     },
+    //Automate the scripts
+    watch: {
+      files: ['&lt;%= jshint.files %&gt;', 'scss/**/*.scss'],
+      tasks: ['concat', 'uglify', 'jshint', 'compass']
+    }
 
   });
 
@@ -57,7 +66,8 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-compass');
+  grunt.loadNpmTasks('grunt-contrib-watch');
   // register task(s).
-  grunt.registerTask('default', ['concat', 'uglify', 'jshint','compass']);
+  grunt.registerTask('default', ['concat', 'uglify', 'jshint', 'compass','watch']);
 
 };
